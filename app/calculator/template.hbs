@@ -1,0 +1,35 @@
+<div>
+  <label>Height(mm)</label>
+  <Input
+    @id="height"
+    @value={{this.height}}
+  />
+  <label>Width(mm)</label>
+  <Input
+    @id="width"
+    @value={{this.width}}
+  />
+  <button {{on "click" this.calculate}}>Calculate</button>
+</div>
+
+{{#if this.components.length}}
+  <table>
+    <tr>
+      <th>Name</th>
+      <th>Height</th>
+      <th>Width</th>
+      <th>Depth</th>
+      <th>Count</th>
+    </tr>
+
+    {{#each this.components as |component|}}
+      <tr>
+        <td>{{component.name}}</td>
+        <td>{{component.height}}</td>
+        <td>{{component.width}}</td>
+        <td>{{component.depth}}</td>
+        <td>{{component.count}}</td>
+      </tr>
+    {{/each}}
+  </table>
+{{/if}}
