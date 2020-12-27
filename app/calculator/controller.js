@@ -5,15 +5,24 @@ import { tracked } from '@glimmer/tracking'
 
 export default class CalculatorController extends Controller {
 
-  @tracked height = 0;
-  @tracked width = 0;
+  @tracked height = 1600;
+  @tracked width = 1000;
   @tracked components = [];
+  @tracked dimensions = [];
 
   //constants
-  @tracked margin = 33;
+  @tracked margin = 30;
   @tracked housing = 40;
   @tracked topMargin = 20;
   @tracked channel = 18;
+  @tracked sashClearance = 1;
+  @tracked splay = 8;
+  @tracked numOfGlazingBars = 1;
+  @tracked sashHorns = 90;
+  @tracked glazingBarWidth = 22;
+  @tracked stileWidth = 56;
+  @tracked rebate = 15;
+  @tracked glassClearance = 5;
 
   //dimensions
   get outerOpeningWidth() {
@@ -26,7 +35,7 @@ export default class CalculatorController extends Controller {
   }
 
   get sashOpeningWidth() {
-    return this.outerOpeningWidth + this.channel;
+    return this.outerOpeningWidth + (2 * this.channel);
   }
 
   get sashInnerOpeningHeight() {
@@ -34,13 +43,65 @@ export default class CalculatorController extends Controller {
   }
 
   get boxWidth() {
-    return this.outerOpeningWidth + (2* this.outerLining.width);
+    return this.outerOpeningWidth + (2 * this.outerLining.width);
   }
 
   get boxHeight() {
     return this.outerOpeningHeight + this.outerLiningHead.height;
   }
 
+  get sashWidth() {
+    return this.sashOpeningWidth - this.sashClearance;
+  }
+
+  get workingSashesHeight() {
+    return this.sashInnerOpeningHeight + this.splay;
+  }
+
+  get overallSightLineWidth() {
+    return this.sashWidth - (2 * this.stileWidth);
+  }
+
+  get overallSightLineHeight() {
+    return this.workingSashesHeight - this.bottomRail.height - this.meetingRail.height - this.topRail.height;
+  }
+
+  get sashSightLineHeight() {
+    return this.overallSightLineHeight / 2;
+  }
+
+  get individualSightLineWidth() {
+    return (this.overallSightLineWidth - (this.numOfGlazingBars * this.glazingBarWidth)) / (this.numOfGlazingBars+1);
+  }
+
+  get topSashHeight() {
+    return this.sashSightLineHeight + this.meetingRail.height + this.topRail.height;
+  }
+
+  get bottomSashHeight() {
+    return this.sashSightLineHeight + this.meetingRail.height + this.bottomRail.height;
+  }
+
+  //Glass
+  get glassOpeningHeight() {
+    return this.sashSightLineHeight + (2 * this.rebate);
+  }
+
+  get glassOpeningWidth() {
+    return this.overallSightLineWidth + (2 * this.rebate);
+  }
+
+  get glass() {
+    let height = this.glassOpeningHeight - this.glassClearance;
+    let width = this.glassOpeningWidth - this.glassClearance;
+    return {
+      name: 'Glass',
+      height,
+      width,
+      depth: 24,
+      count: 1,
+    }
+  }
 
   //Window components
   get sill() {
@@ -50,6 +111,7 @@ export default class CalculatorController extends Controller {
       width: this.boxWidth,
       depth: 143,
       count: 1,
+      lengthKey: 'width',
     }
   }
 
@@ -60,6 +122,7 @@ export default class CalculatorController extends Controller {
       width: this.boxWidth,
       depth: 113,
       count: 1,
+      lengthKey: 'width',
     }
   }
 
@@ -70,6 +133,7 @@ export default class CalculatorController extends Controller {
       width: this.outerOpeningWidth,
       depth: 16,
       count: 1,
+      lengthKey: 'width',
     }
   }
 
@@ -80,6 +144,7 @@ export default class CalculatorController extends Controller {
       width: this.sashOpeningWidth,
       depth: 14,
       count: 1,
+      lengthKey: 'width',
     }
   }
 
@@ -90,6 +155,7 @@ export default class CalculatorController extends Controller {
       width: 101,
       depth: 16,
       count: 2,
+      lengthKey: 'height',
     }
   }
 
@@ -100,6 +166,7 @@ export default class CalculatorController extends Controller {
       width: 83,
       depth: 14,
       count: 2,
+      lengthKey: 'height',
     }
   }
 
@@ -110,6 +177,86 @@ export default class CalculatorController extends Controller {
       width: 22,
       depth: 113,
       count: 2,
+      lengthKey: 'height',
+    }
+  }
+
+  get bottomRail() {
+    return {
+      name: 'Bottom Rail',
+      height: 92,
+      width: this.sashWidth,
+      depth: 47,
+      count: 1,
+      lengthKey: 'width',
+    }
+  }
+
+  get topRail() {
+    return {
+      name: 'Top Rail',
+      height: 62,
+      width: this.sashWidth,
+      depth: 47,
+      count: 1,
+      lengthKey: 'width',
+    }
+  }
+
+  get meetingRail() {
+    return {
+      name: 'Meeting Rail',
+      height: 39,
+      width: this.sashWidth,
+      depth: 56,
+      count: 2,
+      lengthKey: 'width',
+    }
+  }
+
+  //Glazing Bars
+  get glazingBarInner() {
+    return {
+      name: 'Glazing Bar Inner',
+      height: this.glassOpeningHeight,
+      width: this.glazingBarWidth,
+      depth: 11.5,
+      count: 2,
+      lengthKey: 'height',
+    }
+  }
+
+  get glazingBarOuter() {
+    return {
+      name: 'Glazing Bar Outer',
+      height: this.glassOpeningHeight,
+      width: this.glazingBarWidth,
+      depth: 9,
+      count: 2,
+      lengthKey: 'height',
+    }
+  }
+
+  //Stiles
+  get topStile() {
+    return {
+      name: 'Top Stile',
+      height: this.topSashHeight + this.sashHorns,
+      width: this.stileWidth,
+      depth: 47,
+      count: 2,
+      lengthKey: 'height',
+    }
+  }
+
+  get bottomStile() {
+    return {
+      name: 'Bottom Stile',
+      height: this.bottomSashHeight + this.sashHorns,
+      width: this.stileWidth,
+      depth: 47,
+      count: 2,
+      lengthKey: 'height',
     }
   }
 
@@ -123,6 +270,14 @@ export default class CalculatorController extends Controller {
       this.outerLining,
       this.innerLining,
       this.pulleyStiles,
+      this.glass,
+      this.bottomRail,
+      this.topRail,
+      this.meetingRail,
+      this.glazingBarInner,
+      this.glazingBarOuter,
+      this.topStile,
+      this.bottomStile,
     ]
     this.components = components;
   }
