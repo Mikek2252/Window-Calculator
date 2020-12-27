@@ -25,9 +25,9 @@
     {{#each this.components as |component|}}
       <tr>
         <td>{{component.name}}</td>
-        <td>{{component.height}}</td>
-        <td>{{component.width}}</td>
-        <td>{{component.depth}}</td>
+        <td class="{{if (eq component.lengthKey "height") "highlight" }}">{{component.height}}</td>
+        <td class="{{if (eq component.lengthKey "width") "highlight" }}">{{component.width}}</td>
+        <td class="{{if (eq component.lengthKey "depth") "highlight" }}">{{component.depth}}</td>
         <td>{{component.count}}</td>
       </tr>
     {{/each}}
