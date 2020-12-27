@@ -33,3 +33,19 @@
     {{/each}}
   </table>
 {{/if}}
+
+{{#if this.dimensions.length}}
+  <table>
+    <tr>
+      <th>Name</th>
+      <th>Value</th>
+    </tr>
+
+    {{#each this.dimensions as |dimension|}}
+      <tr>
+        <td>{{dimension.name}}</td>
+        <td>{{dimension.value}}</td>
+      </tr>
+    {{/each}}
+  </table>
+{{/if}}

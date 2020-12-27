@@ -262,6 +262,25 @@ export default class CalculatorController extends Controller {
 
   @action
   calculate() {
+    let dimensions = [
+      { name: 'Outer Opening Width', value: this.outerOpeningWidth },
+      { name: 'Outer Opening Height', value: this.outerOpeningHeight },
+      { name: 'Sash Opening Width', value: this.sashOpeningWidth },
+      { name: 'Sash Inner Opening Height', value: this.sashInnerOpeningHeight },
+      { name: 'Box Width', value: this.boxWidth },
+      { name: 'Box Height', value: this.boxHeight },
+      { name: 'Sash Width', value: this.sashWidth },
+      { name: 'Working Sashes Height', value: this.workingSashesHeight },
+      { name: 'Overall Sight Line Width', value: this.overallSightLineWidth },
+      { name: 'Overall Sight Line Height', value: this.overallSightLineHeight },
+      { name: 'Sash Sight Line Height', value: this.sashSightLineHeight },
+      { name: 'Individual Sight Line Width', value: this.individualSightLineWidth },
+      { name: 'Top Sash Height', value: this.topSashHeight },
+      { name: 'Bottom Sash Height', value: this.bottomSashHeight },
+      { name: 'Glass Opening Height', value: this.glassOpeningHeight },
+      { name: 'Glass Opening Width', value: this.glassOpeningWidth },
+    ];
+
     let components = [
       this.sill,
       this.head,
@@ -280,5 +299,6 @@ export default class CalculatorController extends Controller {
       this.bottomStile,
     ]
     this.components = components;
+    this.dimensions = dimensions;
   }
 }
