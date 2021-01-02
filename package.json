@@ -4,8 +4,8 @@
   "private": true,
   "description": "Small description for window-calculator goes here",
   "repository": "",
-  "license": "MIT",
-  "author": "",
+  "license": "GPLv3",
+  "author": "Michael Kerr",
   "directories": {
     "doc": "doc",
     "test": "tests"
