@@ -1,0 +1,18 @@
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Height</th>
+    <th>Width</th>
+    <th>Depth</th>
+    <th>Count</th>
+  </tr>
+  {{#each @components as |component|}}
+    <tr data-test-component-row={{component.name}}>
+      <td data-test-component-name>{{component.name}}</td>
+      <td data-test-component-height class="{{if (eq component.lengthKey "height") "highlight" }}">{{component.height}}</td>
+      <td data-test-component-width class="{{if (eq component.lengthKey "width") "highlight" }}">{{component.width}}</td>
+      <td data-test-component-depth class="{{if (eq component.lengthKey "depth") "highlight" }}">{{component.depth}}</td>
+      <td data-test-component-count>{{component.count}}</td>
+    </tr>
+  {{/each}}
+</table>

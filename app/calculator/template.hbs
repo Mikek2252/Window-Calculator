@@ -13,25 +13,7 @@
 </div>
 
 {{#if this.components.length}}
-  <table>
-    <tr>
-      <th>Name</th>
-      <th>Height</th>
-      <th>Width</th>
-      <th>Depth</th>
-      <th>Count</th>
-    </tr>
-
-    {{#each this.components as |component|}}
-      <tr>
-        <td>{{component.name}}</td>
-        <td class="{{if (eq component.lengthKey "height") "highlight" }}">{{component.height}}</td>
-        <td class="{{if (eq component.lengthKey "width") "highlight" }}">{{component.width}}</td>
-        <td class="{{if (eq component.lengthKey "depth") "highlight" }}">{{component.depth}}</td>
-        <td>{{component.count}}</td>
-      </tr>
-    {{/each}}
-  </table>
+  <CuttingList @components={{this.components}} />
 {{/if}}
 
 {{#if this.dimensions.length}}
