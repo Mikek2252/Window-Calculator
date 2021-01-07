@@ -1,0 +1,33 @@
+<div>
+  <label>Height(mm)</label>
+  <Input
+    @id="height"
+    @value={{this.height}}
+  />
+  <label>Width(mm)</label>
+  <Input
+    @id="width"
+    @value={{this.width}}
+  />
+  <button {{on "click" this.calculate}}>Calculate</button>
+</div>
+
+{{#if this.components.length}}
+  <CuttingList @components={{this.components}} />
+{{/if}}
+
+{{#if this.dimensions.length}}
+  <table>
+    <tr>
+      <th>Name</th>
+      <th>Value</th>
+    </tr>
+
+    {{#each this.dimensions as |dimension|}}
+      <tr>
+        <td>{{dimension.name}}</td>
+        <td>{{dimension.value}}</td>
+      </tr>
+    {{/each}}
+  </table>
+{{/if}}
