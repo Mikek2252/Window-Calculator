@@ -94,170 +94,170 @@ export default class CalculatorController extends Controller {
   get glass() {
     let height = this.glassOpeningHeight - this.glassClearance;
     let width = this.glassOpeningWidth - this.glassClearance;
-    return {
+    return this.store.createRecord('component', {
       name: 'Glass',
       height,
       width,
       depth: 24,
       count: 1,
-    }
+    });
   }
 
   //Window components
   get sill() {
-    return {
+    return this.store.createRecord('component', {
       name: 'Sill',
       height: 60,
       width: this.boxWidth,
       depth: 143,
       count: 1,
       lengthKey: 'width',
-    }
+    });
   }
 
   get head() {
-    return {
+    return this.store.createRecord('component', {
       name: 'Head',
       height: 22,
       width: this.boxWidth,
       depth: 113,
       count: 1,
       lengthKey: 'width',
-    }
+    });
   }
 
   get outerLiningHead() {
-    return {
+    return this.store.createRecord('component', {
       name: 'Outer Lining Head',
       height: 98,
       width: this.outerOpeningWidth,
       depth: 16,
       count: 1,
       lengthKey: 'width',
-    }
+    });
   }
 
   get innerLiningHead() {
-    return {
+    return this.store.createRecord('component', {
       name: 'Inner Lining Head',
       height: 80,
       width: this.sashOpeningWidth,
       depth: 14,
       count: 1,
       lengthKey: 'width',
-    }
+    });
   }
 
   get outerLining() {
-    return {
+    return this.store.createRecord('component', {
       name: 'Outer Lining',
       height: this.boxHeight,
       width: 101,
       depth: 16,
       count: 2,
       lengthKey: 'height',
-    }
+    });
   }
 
   get innerLining() {
-    return {
+    return this.store.createRecord('component', {
       name: 'Inner Lining',
       height: this.boxHeight,
       width: 83,
       depth: 14,
       count: 2,
       lengthKey: 'height',
-    }
+    });
   }
 
   get pulleyStiles() {
-    return {
+    return this.store.createRecord('component', {
       name: 'Pulley Stiles',
       height: this.sashInnerOpeningHeight + this.housing,
       width: 22,
       depth: 113,
       count: 2,
       lengthKey: 'height',
-    }
+    });
   }
 
   get bottomRail() {
-    return {
+    return this.store.createRecord('component', {
       name: 'Bottom Rail',
       height: 92,
       width: this.sashWidth,
       depth: 47,
       count: 1,
       lengthKey: 'width',
-    }
+    });
   }
 
   get topRail() {
-    return {
+    return this.store.createRecord('component', {
       name: 'Top Rail',
       height: 62,
       width: this.sashWidth,
       depth: 47,
       count: 1,
       lengthKey: 'width',
-    }
+    });
   }
 
   get meetingRail() {
-    return {
+    return this.store.createRecord('component', {
       name: 'Meeting Rail',
       height: 39,
       width: this.sashWidth,
       depth: 56,
       count: 2,
       lengthKey: 'width',
-    }
+    });
   }
 
   //Glazing Bars
   get glazingBarInner() {
-    return {
+    return this.store.createRecord('component', {
       name: 'Glazing Bar Inner',
       height: this.glassOpeningHeight,
       width: this.glazingBarWidth,
       depth: 11.5,
       count: 2,
       lengthKey: 'height',
-    }
+    });
   }
 
   get glazingBarOuter() {
-    return {
+    return this.store.createRecord('component', {
       name: 'Glazing Bar Outer',
       height: this.glassOpeningHeight,
       width: this.glazingBarWidth,
       depth: 9,
       count: 2,
       lengthKey: 'height',
-    }
+    });
   }
 
   //Stiles
   get topStile() {
-    return {
+    return this.store.createRecord('component', {
       name: 'Top Stile',
       height: this.topSashHeight + this.sashHorns,
       width: this.stileWidth,
       depth: 47,
       count: 2,
       lengthKey: 'height',
-    }
+    });
   }
 
   get bottomStile() {
-    return {
+    return this.store.createRecord('component', {
       name: 'Bottom Stile',
       height: this.bottomSashHeight + this.sashHorns,
       width: this.stileWidth,
       depth: 47,
       count: 2,
       lengthKey: 'height',
-    }
+    });
   }
 
   @action
