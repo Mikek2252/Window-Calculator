@@ -1,0 +1,12 @@
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Value</th>
+  </tr>
+  {{#each @dimensions as |dimension|}}
+    <tr data-test-dimension-row={{dimension.name}}>
+      <td data-test-dimension-name>{{dimension.name}}</td>
+      <td data-test-dimension-value>{{dimension.value}}</td>
+    </tr>
+  {{/each}}
+</table>
