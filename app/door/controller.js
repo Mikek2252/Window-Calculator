@@ -73,6 +73,11 @@ export default class DoorController extends Controller {
     return this.doorPanelSightLineWidth + (this.fanlightRebate * 2) ;
   }
 
+  get doorPanelOpeningHeight() {
+    // currently door panels are default as square, to be revised.
+    return this.doorPanelOpeningWidth;
+  }
+
   get glassPanelSightLineHeight() {
     return this.doorHeight - this.bottomRail.height - this.doorPanelSightLineWidth - this.midRail.height - this.topRail.height;
   }
@@ -141,7 +146,7 @@ export default class DoorController extends Controller {
     })
   }
 
-  get horizontalBeads() {
+  get fanlightHorizontalBeads() {
     return this.store.createRecord('component', {
       name: 'Horizontal Beads',
       lengthKey: 'width',
@@ -152,7 +157,7 @@ export default class DoorController extends Controller {
     })
   }
 
-  get verticalBeads() {
+  get fanlightVerticalBeads() {
     return this.store.createRecord('component', {
       name: 'Vertical Beads',
       lengthKey: 'height',
@@ -160,6 +165,16 @@ export default class DoorController extends Controller {
       width: 14.5,
       depth: 17.5,
       count: 4,
+    })
+  }
+
+  get fanlightGlass() {
+    return this.store.createRecord('component', {
+      name: 'Fanlight Glass',
+      height: this.fanlightOpeningHeight - this.glassClearance,
+      width: this.fanlightOpeningWidth - this.glassClearance,
+      depth: 25,
+      count: this.numOfMullions + 1,
     })
   }
 
@@ -209,11 +224,32 @@ export default class DoorController extends Controller {
     //Lower panel is usually square, so openingwidth is also the height
     return this.store.createRecord('component', {
       name: 'Lower Panel',
-      // lengthKey: 'width',
       height: this.doorPanelOpeningWidth - this.panelClearance,
       width: this.doorPanelOpeningWidth - this.panelClearance,
       depth: 22,
       count: 1,
+    })
+  }
+
+  get panelHorizontalBeads() {
+    return this.store.createRecord('component', {
+      name: 'Panel Horizontal Beads',
+      lengthKey: 'width',
+      height: 14.5,
+      width: this.doorPanelOpeningWidth,
+      depth: 22,
+      count: 2,
+    })
+  }
+
+  get panelVerticalBeads() {
+    return this.store.createRecord('component', {
+      name: 'Panel Vertical Beads',
+      lengthKey: 'height',
+      height: this.doorPanelOpeningHeight,
+      width: 14.5,
+      depth: 22,
+      count: 2,
     })
   }
 
@@ -264,6 +300,7 @@ export default class DoorController extends Controller {
       { name: 'DoorWidth', value: this.doorWidth },
       { name: 'Door Panel Sightline Width', value: this.doorPanelSightLineWidth },
       { name: 'Door Panel Opening Width', value: this.doorPanelOpeningWidth },
+      { name: 'Door Panel Opening Height', value: this.doorPanelOpeningHeight },
       { name: 'Glass Panel Sightline Height', value: this.glassPanelSightLineHeight },
       { name: 'Glass Panel Opening Height', value: this.glassPanelOpeningHeight },
     ];
@@ -274,13 +311,16 @@ export default class DoorController extends Controller {
       this.cill,
       this.jamb,
       this.mullion,
-      this.horizontalBeads,
-      this.verticalBeads,
+      this.fanlightHorizontalBeads,
+      this.fanlightVerticalBeads,
+      this.fanlightGlass,
       this.stile,
       this.topRail,
       this.midRail,
       this.bottomRail,
       this.lowerPanel,
+      this.panelVerticalBeads,
+      this.panelHorizontalBeads,
       this.verticalGlazingBeads,
       this.horizontalGlazingBeads,
     ]
