@@ -19,6 +19,24 @@ module.exports = function(deployTarget) {
 
   if (deployTarget === 'production') {
     ENV.build.environment = 'production';
+    ENV.pipeline = {
+      activateOnDeply: true
+    };
+
+    ENV.s3 = {
+      accessKeyId: process.env.AWS_ACCESS_KEY,
+      secretAccessKey: process.env.AWS_SECRET,
+      bucket: process.env.S3_BUCKET,
+      region: process.env.BUCKET_REGION,
+      filePattern: '**/*.{js,css,png,gif,ico,jpg,map,xml,txt,svg,swf,eot,ttf,woff,woff2,html}',
+    }
+
+    ENV['s3-index'] = {
+      accessKeyId: process.env.AWS_ACCESS_KEY,
+      secretAccessKey: process.env.AWS_SECRET,
+      bucket: process.env.S3_BUCKET,
+      region: process.env.BUCKET_REGION,
+    }
     // configure other plugins for production deploy target here
   }
 
