@@ -15,7 +15,8 @@ module.exports = {
   ],
   extends: [
     'eslint:recommended',
-    'plugin:ember/recommended'
+    'plugin:ember/recommended',
+    'plugin:prettier/recommended',
   ],
   env: {
     browser: true
@@ -26,8 +27,10 @@ module.exports = {
     {
       files: [
         '.eslintrc.js',
+        '.prettierrc.js',
         '.template-lintrc.js',
         'ember-cli-build.js',
+        'tailwind.config.js',
         'testem.js',
         'blueprints/*/index.js',
         'config/**/*.js',
