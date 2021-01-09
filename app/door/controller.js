@@ -3,7 +3,6 @@ import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
 
 export default class DoorController extends Controller {
-
   @tracked width = 861;
   @tracked height = 2512;
   @tracked clearance = 12;
@@ -17,7 +16,6 @@ export default class DoorController extends Controller {
   @tracked panelClearance = 3;
   @tracked dimensions;
   @tracked components;
-
 
   //dimentions
   get frameHeight() {
@@ -36,7 +34,7 @@ export default class DoorController extends Controller {
     //Fanlight rebate should be the same as the doorframerebate
     //Ask whether doorFrame and fanlight rebate can be the same.
     //Removing the rebate the jambs as they are a stop for the door.
-    return this.frameWidth - ((this.jamb.width - this.fanlightRebate) * 2);
+    return this.frameWidth - (this.jamb.width - this.fanlightRebate) * 2;
   }
 
   get doorWidth() {
@@ -46,31 +44,39 @@ export default class DoorController extends Controller {
 
   get fanlightSightLineWidth() {
     let numOfSections = this.numOfMullions + 1;
-    return (this.frameWidth - (this.jamb.width * 2) - (this.numOfMullions * this.mullion.width)) / numOfSections;
+    return (
+      (this.frameWidth -
+        this.jamb.width * 2 -
+        this.numOfMullions * this.mullion.width) /
+      numOfSections
+    );
   }
 
   get fanlightSightLineHeight() {
     //get transom height without rebate sas it is not included in the mullion height.
-    let transomHeightWithoutDoorRebate = this.transom.height - this.fanlightRebate;
-    return this.mullion.height - this.head.height - transomHeightWithoutDoorRebate;
+    let transomHeightWithoutDoorRebate =
+      this.transom.height - this.fanlightRebate;
+    return (
+      this.mullion.height - this.head.height - transomHeightWithoutDoorRebate
+    );
   }
 
   get fanlightOpeningWidth() {
-    return this.fanlightSightLineWidth + (2 * this.fanlightRebate);
+    return this.fanlightSightLineWidth + 2 * this.fanlightRebate;
   }
 
   get fanlightOpeningHeight() {
-    return this.fanlightSightLineHeight + (2 * this.fanlightRebate);
+    return this.fanlightSightLineHeight + 2 * this.fanlightRebate;
   }
 
   get doorPanelSightLineWidth() {
-    return this.doorWidth - (2* this.stile.width);
+    return this.doorWidth - 2 * this.stile.width;
   }
 
   get doorPanelOpeningWidth() {
     //15mm Rebate seems consistent so fan light rebate was used consider changing name
     //or having seperate rebates for each section if needed.
-    return this.doorPanelSightLineWidth + (this.fanlightRebate * 2) ;
+    return this.doorPanelSightLineWidth + this.fanlightRebate * 2;
   }
 
   get doorPanelOpeningHeight() {
@@ -79,11 +85,17 @@ export default class DoorController extends Controller {
   }
 
   get glassPanelSightLineHeight() {
-    return this.doorHeight - this.bottomRail.height - this.doorPanelSightLineWidth - this.midRail.height - this.topRail.height;
+    return (
+      this.doorHeight -
+      this.bottomRail.height -
+      this.doorPanelSightLineWidth -
+      this.midRail.height -
+      this.topRail.height
+    );
   }
 
   get glassPanelOpeningHeight() {
-    return this.glassPanelSightLineHeight + (this.fanlightRebate * 2)
+    return this.glassPanelSightLineHeight + this.fanlightRebate * 2;
   }
 
   //component
@@ -96,12 +108,12 @@ export default class DoorController extends Controller {
       width: this.frameWidth,
       depth: 95,
       count: 1,
-    })
+    });
   }
 
   get cill() {
     //Give name to 25
-    let cillWidth = this.frameWidth + (2 * 25);
+    let cillWidth = this.frameWidth + 2 * 25;
     return this.store.createRecord('component', {
       name: 'Cill',
       lengthKey: 'width',
@@ -120,7 +132,7 @@ export default class DoorController extends Controller {
       width: this.frameWidth,
       depth: 95,
       count: 1,
-    })
+    });
   }
 
   get jamb() {
@@ -131,11 +143,14 @@ export default class DoorController extends Controller {
       width: 57,
       depth: 95,
       count: 2,
-    })
+    });
   }
 
   get mullion() {
-    let mullionHeight = this.frameHeight - (this.cill.height - this.cillRebate) - this.doorOpeningHeight;
+    let mullionHeight =
+      this.frameHeight -
+      (this.cill.height - this.cillRebate) -
+      this.doorOpeningHeight;
     return this.store.createRecord('component', {
       name: 'Mullion',
       lengthKey: 'height',
@@ -143,7 +158,7 @@ export default class DoorController extends Controller {
       width: 72,
       depth: 95,
       count: 2,
-    })
+    });
   }
 
   get fanlightHorizontalBeads() {
@@ -154,7 +169,7 @@ export default class DoorController extends Controller {
       width: this.fanlightOpeningWidth,
       depth: 17.5,
       count: 4,
-    })
+    });
   }
 
   get fanlightVerticalBeads() {
@@ -165,7 +180,7 @@ export default class DoorController extends Controller {
       width: 14.5,
       depth: 17.5,
       count: 4,
-    })
+    });
   }
 
   get fanlightGlass() {
@@ -175,7 +190,7 @@ export default class DoorController extends Controller {
       width: this.fanlightOpeningWidth - this.glassClearance,
       depth: 25,
       count: this.numOfMullions + 1,
-    })
+    });
   }
 
   //Door
@@ -187,7 +202,7 @@ export default class DoorController extends Controller {
       width: 110,
       depth: 45,
       count: 2,
-    })
+    });
   }
   get topRail() {
     return this.store.createRecord('component', {
@@ -197,7 +212,7 @@ export default class DoorController extends Controller {
       width: this.doorWidth,
       depth: 45,
       count: 1,
-    })
+    });
   }
   get midRail() {
     return this.store.createRecord('component', {
@@ -207,7 +222,7 @@ export default class DoorController extends Controller {
       width: this.doorWidth,
       depth: 45,
       count: 1,
-    })
+    });
   }
   get bottomRail() {
     return this.store.createRecord('component', {
@@ -217,7 +232,7 @@ export default class DoorController extends Controller {
       width: this.doorWidth,
       depth: 45,
       count: 1,
-    })
+    });
   }
 
   get lowerPanel() {
@@ -228,7 +243,7 @@ export default class DoorController extends Controller {
       width: this.doorPanelOpeningWidth - this.panelClearance,
       depth: 22,
       count: 1,
-    })
+    });
   }
 
   get panelHorizontalBeads() {
@@ -239,7 +254,7 @@ export default class DoorController extends Controller {
       width: this.doorPanelOpeningWidth,
       depth: 22,
       count: 2,
-    })
+    });
   }
 
   get panelVerticalBeads() {
@@ -250,7 +265,7 @@ export default class DoorController extends Controller {
       width: 14.5,
       depth: 22,
       count: 2,
-    })
+    });
   }
 
   get glassPanel() {
@@ -261,7 +276,7 @@ export default class DoorController extends Controller {
       width: this.doorPanelOpeningWidth - this.glassClearance,
       depth: 22,
       count: 1,
-    })
+    });
   }
 
   get verticalGlazingBeads() {
@@ -272,7 +287,7 @@ export default class DoorController extends Controller {
       width: 14.5,
       depth: 22,
       count: 2,
-    })
+    });
   }
 
   get horizontalGlazingBeads() {
@@ -283,7 +298,7 @@ export default class DoorController extends Controller {
       width: this.doorPanelOpeningWidth,
       depth: 22,
       count: 2,
-    })
+    });
   }
 
   @action
@@ -294,15 +309,27 @@ export default class DoorController extends Controller {
       { name: 'Door Opening Height', value: this.doorOpeningHeight },
       { name: 'Door Opening Width', value: this.doorOpeningWidth },
       { name: 'Fanlight SightLine Width', value: this.fanlightSightLineWidth },
-      { name: 'Fanlight SightLine Height', value: this.fanlightSightLineHeight },
+      {
+        name: 'Fanlight SightLine Height',
+        value: this.fanlightSightLineHeight,
+      },
       { name: 'Fanlight Opening Width', value: this.fanlightOpeningWidth },
       { name: 'Fanlight Opening Height', value: this.fanlightOpeningHeight },
       { name: 'DoorWidth', value: this.doorWidth },
-      { name: 'Door Panel Sightline Width', value: this.doorPanelSightLineWidth },
+      {
+        name: 'Door Panel Sightline Width',
+        value: this.doorPanelSightLineWidth,
+      },
       { name: 'Door Panel Opening Width', value: this.doorPanelOpeningWidth },
       { name: 'Door Panel Opening Height', value: this.doorPanelOpeningHeight },
-      { name: 'Glass Panel Sightline Height', value: this.glassPanelSightLineHeight },
-      { name: 'Glass Panel Opening Height', value: this.glassPanelOpeningHeight },
+      {
+        name: 'Glass Panel Sightline Height',
+        value: this.glassPanelSightLineHeight,
+      },
+      {
+        name: 'Glass Panel Opening Height',
+        value: this.glassPanelOpeningHeight,
+      },
     ];
 
     let components = [
@@ -323,7 +350,7 @@ export default class DoorController extends Controller {
       this.panelHorizontalBeads,
       this.verticalGlazingBeads,
       this.horizontalGlazingBeads,
-    ]
+    ];
     this.components = components;
     this.dimensions = dimensions;
   }
