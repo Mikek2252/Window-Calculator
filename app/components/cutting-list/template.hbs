@@ -1,24 +1,37 @@
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Height</th>
-    <th>Width</th>
-    <th>Depth</th>
-    <th>Count</th>
-    <th>Cubic Feet</th>
-    <th>Cubic Meters</th>
-  </tr>
-  {{#each @components as |component|}}
-    <tr data-test-component-row={{component.name}}>
-      <td data-test-component-name>{{component.name}}</td>
-      <td data-test-component-height class="{{if (eq component.lengthKey "height") "highlight" }}">{{component.height}}</td>
-      <td data-test-component-width class="{{if (eq component.lengthKey "width") "highlight" }}">{{component.width}}</td>
-      <td data-test-component-depth class="{{if (eq component.lengthKey "depth") "highlight" }}">{{component.depth}}</td>
-      <td data-test-component-count>{{component.count}}</td>
-      <td data-test-component-cubic-feet>{{component.cubicFeet}}</td>
-      <td data-test-component-cubic-meters>{{component.cubicMeters}}</td>
-    </tr>
-  {{/each}}
-</table>
-<p>Total Cubic Feet: {{this.totalCubicFeet}}</p>
-<p>Total Cubic Meters: {{this.totalCubicMeters}}</p>
+<div class="flex flex-col" ...attributes>
+  <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+    <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+      <h2 class="flex-auto text-xl font-semibold mb-5">
+        Cutting List
+      </h2>
+      <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+        <table class="min-w-full divide-y divide-gray-200">
+          <thead class="bg-gray-50">
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Height</th>
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Width</th>
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Depth</th>
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Count</th>
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Cubic Feet</th>
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Cubic Meters</th>
+          </thead>
+          <tbody class="bg-white divide-y divide-gray-200">
+            {{#each @components as |component|}}
+              <tr data-test-component-row={{component.name}}>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500" data-test-component-name>{{component.name}}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 {{if (eq component.lengthKey "height") "highlight" }}" data-test-component-height>{{component.height}}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 {{if (eq component.lengthKey "width") "highlight" }}" data-test-component-width>{{component.width}}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 {{if (eq component.lengthKey "depth") "highlight" }}" data-test-component-depth>{{component.depth}}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500" data-test-component-count>{{component.count}}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500" data-test-component-cubic-feet>{{component.cubicFeet}}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500" data-test-component-cubic-meters>{{component.cubicMeters}}</td>
+              </tr>
+            {{/each}}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <p>Total Cubic Feet: {{this.totalCubicFeet}}</p>
+  <p>Total Cubic Meters: {{this.totalCubicMeters}}</p>
+</div>
