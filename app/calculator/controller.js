@@ -29,7 +29,7 @@ export default class CalculatorController extends Controller {
     return this.width - (2*this.margin);
   }
 
-  //Stone sill to outer lining head
+  //Stone cill to outer lining head
   get outerOpeningHeight() {
     return this.height - this.topMargin;
   }
@@ -39,7 +39,7 @@ export default class CalculatorController extends Controller {
   }
 
   get sashInnerOpeningHeight() {
-    return this.outerOpeningHeight + this.channel - this.sill.height;
+    return this.outerOpeningHeight + this.channel - this.cill.height;
   }
 
   get boxWidth() {
@@ -99,14 +99,14 @@ export default class CalculatorController extends Controller {
       height,
       width,
       depth: 24,
-      count: 1,
+      count: 4,
     });
   }
 
   //Window components
-  get sill() {
+  get cill() {
     return this.store.createRecord('component', {
-      name: 'Sill',
+      name: 'Cill',
       height: 60,
       width: this.boxWidth,
       depth: 143,
@@ -282,7 +282,7 @@ export default class CalculatorController extends Controller {
     ];
 
     let components = [
-      this.sill,
+      this.cill,
       this.head,
       this.outerLiningHead,
       this.innerLiningHead,
