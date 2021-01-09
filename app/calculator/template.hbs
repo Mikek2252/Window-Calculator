@@ -1,21 +1,47 @@
-<div>
-  <label>Height(mm)</label>
-  <Input
-    @id="height"
-    @value={{this.height}}
-  />
-  <label>Width(mm)</label>
-  <Input
-    @id="width"
-    @value={{this.width}}
-  />
-  <button {{on "click" this.calculate}}>Calculate</button>
+<h1 class="text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:truncate">Window Calculator</h1>
+<div class="mt-10 sm:mt-0">
+  <div>
+    <div class="mt-5 md:mt-0">
+      <form>
+        <div class="shadow overflow-hidden sm:rounded-md">
+          <div class="px-4 py-5 bg-white sm:p-6">
+            <div class="grid grid-cols-10 gap-6">
+              <div class="col-span-4 sm:col-span-4">
+                <label for="height" class="block text-sm font-medium text-gray-700">Height(mm)</label>
+                <Input
+                  @id="height"
+                  @type="text"
+                  @value={{this.height}}
+                  class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                />
+              </div>
+              <div class="col-span-4 sm:col-span-4">
+                <label for="width" class="block text-sm font-medium text-gray-700">Width(mm)</label>
+                <Input
+                  @id="width"
+                  @type="text"
+                  @value={{this.width}}
+                  class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                />
+              </div>
+              <div class="col-span-2 sm:col-span-2 flex items-end">
+                <button type="button" {{on "click" this.calculate}} class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                  Calculate
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
 </div>
+<div>
+  {{#if this.components.length}}
+    <CuttingList class="mt-5" @components={{this.components}} />
+  {{/if}}
 
-{{#if this.components.length}}
-  <CuttingList @components={{this.components}} />
-{{/if}}
-
-{{#if this.dimensions.length}}
-  <DimensionsTable @dimensions={{this.dimensions}} />
-{{/if}}
+  {{#if this.dimensions.length}}
+    <DimensionsTable class="mt-5" @dimensions={{this.dimensions}} />
+  {{/if}}
+</div>
