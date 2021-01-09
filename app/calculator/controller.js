@@ -1,10 +1,8 @@
 import Controller from '@ember/controller';
 import { action } from '@ember/object';
-import { tracked } from '@glimmer/tracking'
-
+import { tracked } from '@glimmer/tracking';
 
 export default class CalculatorController extends Controller {
-
   @tracked height = 1600;
   @tracked width = 1000;
   @tracked components = [];
@@ -26,7 +24,7 @@ export default class CalculatorController extends Controller {
 
   //dimensions
   get outerOpeningWidth() {
-    return this.width - (2*this.margin);
+    return this.width - 2 * this.margin;
   }
 
   //Stone cill to outer lining head
@@ -35,7 +33,7 @@ export default class CalculatorController extends Controller {
   }
 
   get sashOpeningWidth() {
-    return this.outerOpeningWidth + (2 * this.channel);
+    return this.outerOpeningWidth + 2 * this.channel;
   }
 
   get sashInnerOpeningHeight() {
@@ -43,7 +41,7 @@ export default class CalculatorController extends Controller {
   }
 
   get boxWidth() {
-    return this.outerOpeningWidth + (2 * this.outerLining.width);
+    return this.outerOpeningWidth + 2 * this.outerLining.width;
   }
 
   get boxHeight() {
@@ -59,11 +57,16 @@ export default class CalculatorController extends Controller {
   }
 
   get overallSightLineWidth() {
-    return this.sashWidth - (2 * this.stileWidth);
+    return this.sashWidth - 2 * this.stileWidth;
   }
 
   get overallSightLineHeight() {
-    return this.workingSashesHeight - this.bottomRail.height - this.meetingRail.height - this.topRail.height;
+    return (
+      this.workingSashesHeight -
+      this.bottomRail.height -
+      this.meetingRail.height -
+      this.topRail.height
+    );
   }
 
   get sashSightLineHeight() {
@@ -71,24 +74,34 @@ export default class CalculatorController extends Controller {
   }
 
   get individualSightLineWidth() {
-    return (this.overallSightLineWidth - (this.numOfGlazingBars * this.glazingBarWidth)) / (this.numOfGlazingBars+1);
+    return (
+      (this.overallSightLineWidth -
+        this.numOfGlazingBars * this.glazingBarWidth) /
+      (this.numOfGlazingBars + 1)
+    );
   }
 
   get topSashHeight() {
-    return this.sashSightLineHeight + this.meetingRail.height + this.topRail.height;
+    return (
+      this.sashSightLineHeight + this.meetingRail.height + this.topRail.height
+    );
   }
 
   get bottomSashHeight() {
-    return this.sashSightLineHeight + this.meetingRail.height + this.bottomRail.height;
+    return (
+      this.sashSightLineHeight +
+      this.meetingRail.height +
+      this.bottomRail.height
+    );
   }
 
   //Glass
   get glassOpeningHeight() {
-    return this.sashSightLineHeight + (2 * this.rebate);
+    return this.sashSightLineHeight + 2 * this.rebate;
   }
 
   get glassOpeningWidth() {
-    return this.overallSightLineWidth + (2 * this.rebate);
+    return this.overallSightLineWidth + 2 * this.rebate;
   }
 
   get glass() {
@@ -274,7 +287,10 @@ export default class CalculatorController extends Controller {
       { name: 'Overall Sight Line Width', value: this.overallSightLineWidth },
       { name: 'Overall Sight Line Height', value: this.overallSightLineHeight },
       { name: 'Sash Sight Line Height', value: this.sashSightLineHeight },
-      { name: 'Individual Sight Line Width', value: this.individualSightLineWidth },
+      {
+        name: 'Individual Sight Line Width',
+        value: this.individualSightLineWidth,
+      },
       { name: 'Top Sash Height', value: this.topSashHeight },
       { name: 'Bottom Sash Height', value: this.bottomSashHeight },
       { name: 'Glass Opening Height', value: this.glassOpeningHeight },
@@ -297,7 +313,7 @@ export default class CalculatorController extends Controller {
       this.glazingBarOuter,
       this.topStile,
       this.bottomStile,
-    ]
+    ];
     this.components = components;
     this.dimensions = dimensions;
   }

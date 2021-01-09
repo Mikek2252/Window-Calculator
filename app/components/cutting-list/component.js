@@ -1,18 +1,18 @@
 import Component from '@glimmer/component';
 
 export default class CuttingListComponent extends Component {
-
   get woodComponents() {
-    return this.args.components
-      .filter(component => !component.name.toLowerCase().includes("glass"));
+    return this.args.components.filter(
+      component => !component.name.toLowerCase().includes('glass'),
+    );
   }
 
   get totalCubicFeet() {
-    return this.sumValue("cubicFeet");
+    return this.sumValue('cubicFeet');
   }
 
   get totalCubicMeters() {
-    return this.sumValue("cubicMeters");
+    return this.sumValue('cubicMeters');
   }
 
   sumValue(key) {
